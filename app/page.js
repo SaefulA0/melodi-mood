@@ -1,113 +1,118 @@
-import Image from 'next/image'
+"use client";
+import React from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+async function getYoutube() {
+  const apiKey = "AIzaSyA5Jyd-dCU1asIJnNSoH9vmtuK8E5TD08M";
+  let data = fetch(
+    `https://youtube.googleapis.com/youtube/v3/search?order=viewCount&q=musik&key=${apiKey}`
+  );
+  console.log(data);
+  return data;
+}
 
 export default function Home() {
+  const router = useRouter();
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="min-h-screen max-w-full p-8 pt-11 md:flex bg-[#F4F5FC] border shadow-sm rounded-l-3xl">
+      {/* flex kiri */}
+      <div className="md:basis-full md:mr-10">
+        {/* home */}
+        <div className="md:mb-10">
+          <h1 className="text-4xl text-gray-700 font-bold mb-4">Beranda</h1>
+          {/* <MusicRecommendation /> */}
+          <div className="flex md:justify-between w-full h-32 md:h-52 mb-5 p-4 md:p-10 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-md">
+            <div className="mr-2 flex flex-col justify-between items-start">
+              <p className="text-lg font-normal text-slate-100">
+                Perlihatkan ekspresi wajahmu. Ungkapkan moodmu dengan satu klik.
+              </p>
+              <button
+                type="button"
+                onClick={() => router.push("/mood")}
+                className="flex-shrink-0 text-white bg-indigo-700 border-0 py-1.5 px-4 focus:outline-none transition ease-in-out hover:bg-indigo-800 hover:-translate-y-1 duration-300 rounded-lg text-base mt-10 sm:mt-0 shadow-lg"
+              >
+                Identifikasi
+              </button>
+            </div>
+            <div className="w-24 md:w-32 h-24 md:h-32 flex justify-center items-center">
+              <Image
+                src="/forUI/face-recognition.png"
+                width={512}
+                height={512}
+                alt="face-recognition"
+              />
+            </div>
+          </div>
+        </div>
+        {/* tranding saat ini */}
+        <div className="mb-10">
+          <h2 className="text-lg text-gray-700 font-bold mb-4">
+            Tranding saat ini
+          </h2>
+          {/* card music */}
+          <div className="w-full h-fit flex justify-between items-center px-2">
+            <div className="flex items-center gap-7">
+              <span className="font-bold text-opacity-50 text-gray-600">
+                01
+              </span>
+              <div className="w-11 h-11 bg-gray-600 rounded-md flex justify-center items-center">
+                img
+              </div>
+              <div className="w-28 md:w-52">
+                <h3 className="text-base font-semibold truncate">
+                  Judul musik
+                </h3>
+                <p className="text-sm font-normal text-gray-600 text-opacity-50 truncate">
+                  Nama penyanyi
+                </p>
+              </div>
+            </div>
+            <span className="text-sm font-medium">03.23</span>
+            <span className="hidden md:flex text-sm font-normal text-gray-600 text-opacity-50 truncate">
+              1.000.000
+            </span>
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      {/* flex kanan */}
+      <div className="md:basis-1/2">
+        {/* playlist */}
+        <div className="mt-12">
+          <h2 className="text-lg text-gray-700 font-bold mb-4">Playlist</h2>
+          {/* card playlist */}
+          <div className="flex flex-wrap gap-2">
+            <div className="w-36 h-44">
+              <div className="w-full h-24 mb-1 bg-gray-700 flex justify-center items-center rounded-lg">
+                img
+              </div>
+              <h3 className="text-base font-semibold truncate">
+                Judul playlist
+              </h3>
+              <p className="text-sm font-normal text-gray-600 text-opacity-50 truncate">
+                Pemilih playlist
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
-  )
+  );
 }
